@@ -12,20 +12,17 @@ namespace SchoolManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Lecturer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Lecturer()
         {
             this.Enrollments = new HashSet<Enrollment>();
         }
     
-        public int StudentID { get; set; }
-        public string LastName { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
-        public Nullable<System.DateTime> EnrollmentDate { get; set; }
-        public string MiddleName { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string LastName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enrollment> Enrollments { get; set; }
