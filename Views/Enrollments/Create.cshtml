@@ -10,50 +10,30 @@
         $(function () {
 
             function LoadEnrollments(cid) {
-        $.ajax({
-            url: '@Url.Action("_enrollmentPartial","Enrollments")',
-            dataType: 'html',
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            data: {
-                courseid: cid
-            },
-            success: function (data) {
-                $('#data').fadeOut().html(data).fadeIn();
+                $.ajax({
+                    url: '@Url.Action("_enrollmentPartial","Enrollments")',
+                    dataType: 'html',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    data: {
+                        courseid: cid
+                    },
+                    success: function (data) {
+                        $('#data').fadeOut().html(data).fadeIn();
+                    }
+                });
             }
-        });
-    
-            
 
-        var cid = $('#CourseID').val();
-        $.ajax({
-            url: '@Url.Action("_enrollmentPartial","Enrollments")',
-            dataType: 'html',
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            data: {
-                courseid: cid
-            },
-            success: function (data) {
-                $('#data').fadeOut().html(data).fadeIn();
-            }
-        });
-    });
+
+            var cid = $('#CourseID').val();
+            LoadEnrollments(cid);
+
 
         $('CourseID').change(function () {
-        var cid = $('#CourseID').val();
-        $.ajax({
-            url: '@Url.Action("_enrollmentPartial","Enrollments")',
-            dataType: 'html',
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            data: {
-                courseid: cid
-            },
-            success: function (data) {
-                $('#data').fadeOut().html(data).fadeIn();
-            }
-        });
+            var cid = $('#CourseID').val();
+            LoadEnrollments(cid);
+            $("#failed").fadeIn('fast');
+            $("#sucess").fadeOut('fast');
     });
 
 
@@ -69,9 +49,7 @@
                     success: function (data) {
                         console.log(data);
                         response($map(data, function (item) {
-                            return {
-                                label: item.Name, value: item.Name, id: item.Id
-                            };
+                            return { label: item.Name, value: item.Name, id: item.Id  };
                         }))
                     }
                 });
@@ -82,7 +60,7 @@
                 $("#StudentID").val(query.item.id);
             }
         });
-    });
+
 
     function Added(res) {
 
@@ -91,6 +69,19 @@
                 $("#failed").fadeOut('fast');
                 $("#sucess").fadeIn('fast');
                 //  $('#sucess').append(res.Message);
+                var cid = $('#CourseID').val();
+                 $.ajax({
+                    url: '@Url.Action("_enrollmentPartial","Enrollments")',
+                    dataType: 'html',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    data: {
+                        courseid: cid
+                    },
+                    success: function (data) {
+                        $('#data').fadeOut().html(data).fadeIn();
+                    }
+                });
             })
         }
         else {
@@ -104,7 +95,12 @@
                 $("#sucess").fadeOut('fast');
             })
     }
+            function Failure() {
+                $(function () {
+                    $("#failed").fadeIn('fast');
 
+                })
+            }
     </script>
 
 <h2>Create</h2>
